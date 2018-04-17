@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>caredit</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+
+<div class="container">
+    <h1>后端 Car Thymeleaf</h1>
+    <form action="/saveCar" class="form form-horizontal" method="post">
+        <h3 th:if="${car}">修改小汽车</h3>
+        <h3 th:unless="${car}">新增小汽车</h3>
+        <div class="row cl">
+            <label for="name" class="form-label col-xs-4 col-ms-3"
+                   style="padding-left: 8px;">
+                <span class="c-red">*</span>&nbsp;车名:
+            </label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="hidden" id="id" name="id" th:value="${car==null?'':car.id}">
+                <input type="text" class="input-text radius" th:value="${car==null?'':car.name}"
+                       placeholder="车名" id="name" name="name">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label for="price" class="form-label col-xs-4 col-ms-3"
+                   style="padding-left: 8px;">
+                <span class="c-red">*</span>&nbsp;价格:
+            </label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="number" class="input-text radius" th:value="${car==null?'':#numbers.formatDecimal(car.price,1,2)}"
+                       placeholder="价格" id="price" name="price" step="0.01">
+
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label for="createDate" class="form-label col-xs-4 col-ms-3"
+                   style="padding-left: 8px;">
+                <span class="c-red">*</span>&nbsp;生产日期:
+            </label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="date" class="input-text radius" th:value="${car==null?'':#dates.format(car.createDate,'yyyy-MM-dd')}"
+                       id="createDate" name="createDate">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label for="createDate" class="form-label col-xs-4 col-ms-3"
+                   style="padding-left: 8px;">
+            </label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>
